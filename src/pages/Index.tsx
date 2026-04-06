@@ -7,10 +7,12 @@ import LocationSection from "@/components/LocationSection";
 const Index = () => (
   <>
     <Header />
-    <HeroSection />
-    <MenuSection />
-    <AboutSection />
-    <LocationSection />
+    <main>
+      <HeroSection />
+      <MenuSection />
+      <AboutSection />
+      <LocationSection />
+    </main>
   </>
 );
 
