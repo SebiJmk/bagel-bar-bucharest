@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Menu, X, Phone } from "lucide-react";
+import logo from "@/assets/logo.png";
 
 const Header = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -12,6 +13,7 @@ const Header = () => {
   }, []);
 
   const navLinks = [
+    { label: "Acasă", href: "#home" },
     { label: "Meniu", href: "#meniu" },
     { label: "Povestea", href: "#povestea" },
     { label: "Locație", href: "#locatie" },
@@ -26,9 +28,12 @@ const Header = () => {
           : "bg-transparent"
       }`}
     >
-      <div className="container mx-auto flex items-center justify-between px-6 py-5 lg:px-10">
-        <a href="#" className="font-heading text-2xl md:text-3xl font-bold tracking-tight text-foreground">
-          The Bagel Bar
+      <div className="container mx-auto flex items-center justify-between px-6 py-4 lg:px-10">
+        <a href="#home" className="flex items-center gap-3">
+          <img src={logo} alt="The Bagel Bar logo" className="h-10 w-10 rounded-full" />
+          <span className="font-heading text-2xl md:text-3xl font-bold tracking-tight text-foreground">
+            The Bagel Bar
+          </span>
         </a>
 
         {/* Desktop nav */}
