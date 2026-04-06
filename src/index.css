@@ -55,6 +55,12 @@
     @apply border-border;
   }
 
+  @media (pointer: fine) {
+    *, *::before, *::after {
+      cursor: none !important;
+    }
+  }
+
   html {
     scroll-behavior: smooth;
     scroll-padding-top: 80px;
@@ -78,6 +84,14 @@
   .hover-lift:hover {
     transform: translateY(-4px);
     box-shadow: 0 16px 40px -8px hsl(226 71% 48% / 0.15);
+  }
+
+  .dot-fill {
+    flex: 1;
+    min-width: 1rem;
+    border-bottom: 2px dotted hsl(var(--border));
+    position: relative;
+    bottom: 0.25em;
   }
 
   .fade-up {
