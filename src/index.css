@@ -55,6 +55,12 @@
     @apply border-border;
   }
 
+  @media (pointer: fine) {
+    *, *::before, *::after {
+      cursor: none !important;
+    }
+  }
+
   html {
     scroll-behavior: smooth;
     scroll-padding-top: 80px;
