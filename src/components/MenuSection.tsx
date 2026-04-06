@@ -85,9 +85,8 @@ const MenuSection = () => {
                 </span>
               </div>
               <div className="p-5">
-                {/* Flexbox row with dot leader */}
-                <div className="flex items-baseline gap-2 mb-2">
-                  <h3 className="text-lg font-bold flex-grow min-w-0 dot-leader">{item.name}</h3>
+                <div className="dot-leader mb-2">
+                  <h3 className="text-lg font-bold">{item.name}</h3>
                   <span className="font-bold text-primary flex-shrink-0 whitespace-nowrap">{item.price}</span>
                 </div>
                 <p className="text-muted-foreground text-sm">{item.desc}</p>
