@@ -7,7 +7,7 @@ const Header = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 50);
+    const onScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
@@ -17,67 +17,65 @@ const Header = () => {
     { label: "Meniu", href: "#meniu" },
     { label: "Povestea", href: "#povestea" },
     { label: "Locație", href: "#locatie" },
-    { label: "Instagram", href: "https://instagram.com/thebagelbarbucharest", external: true },
   ];
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled
-          ? "bg-background/95 backdrop-blur-md shadow-[0_1px_0_hsl(var(--border))]"
-          : "bg-transparent"
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        scrolled ? "bg-background shadow-sm" : "bg-background/80 backdrop-blur-md"
       }`}
     >
-      <div className="container mx-auto flex items-center justify-between px-6 py-4 lg:px-10">
-        <a href="#home" className="flex items-center gap-3">
-          <img src={logo} alt="The Bagel Bar logo" className="h-9 w-9 rounded-lg shadow-sm" />
-          <span className="font-heading text-xl md:text-2xl font-bold tracking-tight text-foreground">
+      <div className="container mx-auto flex items-center justify-between px-5 py-3 lg:px-8">
+        <a href="#home" className="flex items-center gap-2.5">
+          <img src={logo} alt="The Bagel Bar" className="h-9 w-9 rounded-lg" />
+          <span className="text-xl font-bold tracking-tight text-foreground">
             The Bagel Bar
           </span>
         </a>
 
-        {/* Desktop nav */}
-        <nav className="hidden md:flex items-center gap-8">
+        <nav className="hidden md:flex items-center gap-7">
           {navLinks.map((l) => (
             <a
               key={l.label}
               href={l.href}
-              target={l.external ? "_blank" : undefined}
-              rel={l.external ? "noopener noreferrer" : undefined}
-              className="nav-link text-sm font-medium tracking-wide text-foreground/70 hover:text-foreground transition-colors pb-0.5"
+              className="nav-link text-sm font-medium text-muted-foreground hover:text-foreground transition-colors pb-0.5"
             >
               {l.label}
             </a>
           ))}
           <a
-            href="tel:+40700000000"
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border-2 border-primary text-primary text-sm font-semibold tracking-wide transition-all duration-300 hover:bg-primary hover:text-primary-foreground hover:shadow-lg"
+            href="https://instagram.com/thebagelbarbucharest"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="nav-link text-sm font-medium text-muted-foreground hover:text-foreground transition-colors pb-0.5"
           >
-            <Phone className="h-4 w-4" />
+            Instagram
+          </a>
+          <a
+            href="tel:+40700000000"
+            className="inline-flex items-center gap-2 px-5 py-2 rounded-lg bg-primary text-primary-foreground text-sm font-semibold transition-all duration-200 hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/25"
+          >
+            <Phone className="h-3.5 w-3.5" />
             Sună acum
           </a>
         </nav>
 
-        {/* Mobile toggle */}
         <button
           className="md:hidden text-foreground"
           onClick={() => setMobileOpen(!mobileOpen)}
           aria-label="Toggle menu"
         >
-          {mobileOpen ? <X size={26} /> : <Menu size={26} />}
+          {mobileOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
       </div>
 
-      {/* Mobile menu */}
       {mobileOpen && (
-        <div className="md:hidden bg-background/98 backdrop-blur-xl border-t border-border px-6 pb-8 pt-4 animate-fade-in">
+        <div className="md:hidden bg-background border-t border-border px-5 pb-6 pt-2 animate-fade-in">
           {navLinks.map((l) => (
             <a
               key={l.label}
               href={l.href}
-              target={l.external ? "_blank" : undefined}
-              rel={l.external ? "noopener noreferrer" : undefined}
-              className="block py-3.5 text-base font-medium text-foreground/70 hover:text-foreground transition-colors border-b border-border/40 last:border-0"
+              className="block py-3 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
               onClick={() => setMobileOpen(false)}
             >
               {l.label}
@@ -85,9 +83,9 @@ const Header = () => {
           ))}
           <a
             href="tel:+40700000000"
-            className="mt-5 w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full border-2 border-primary text-primary text-sm font-semibold tracking-wide transition-all duration-300 hover:bg-primary hover:text-primary-foreground"
+            className="mt-3 w-full inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg bg-primary text-primary-foreground text-sm font-semibold"
           >
-            <Phone className="h-4 w-4" />
+            <Phone className="h-3.5 w-3.5" />
             Sună acum
           </a>
         </div>
