@@ -52,8 +52,8 @@ const CustomCursor = () => {
       <motion.div
         className="rounded-full border border-background bg-transparent -translate-x-1/2 -translate-y-1/2"
         animate={{
-          width: hovered ? 48 : 16,
-          height: hovered ? 48 : 16,
+          width: hovered ? 32 : 16,
+          height: hovered ? 32 : 16,
           backgroundColor: hovered ? "hsl(var(--background))" : "transparent",
         }}
         transition={{ duration: 0.2, ease: "easeOut" }}
