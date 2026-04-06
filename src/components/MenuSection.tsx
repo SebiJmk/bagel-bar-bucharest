@@ -85,8 +85,9 @@ const MenuSection = () => {
                 </span>
               </div>
               <div className="p-5">
-                <div className="dot-leader mb-2">
-                  <h3 className="text-lg font-bold">{item.name}</h3>
+                <div className="flex items-baseline mb-2">
+                  <h3 className="text-lg font-bold shrink min-w-0">{item.name}</h3>
+                  <span className="dot-fill mx-2" />
                   <span className="font-bold text-primary flex-shrink-0 whitespace-nowrap">{item.price}</span>
                 </div>
                 <p className="text-muted-foreground text-sm">{item.desc}</p>
