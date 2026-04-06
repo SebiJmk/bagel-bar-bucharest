@@ -80,6 +80,20 @@
     box-shadow: 0 16px 40px -8px hsl(226 71% 48% / 0.15);
   }
 
+  .dot-leader::after {
+    content: '';
+    flex-grow: 1;
+    border-bottom: 2px dotted hsl(var(--border));
+    margin: 0 0.5rem;
+    min-width: 1rem;
+    position: relative;
+    bottom: 0.25em;
+  }
+  .dot-leader {
+    display: flex;
+    align-items: baseline;
+  }
+
   .fade-up {
     opacity: 0;
     transform: translateY(24px);

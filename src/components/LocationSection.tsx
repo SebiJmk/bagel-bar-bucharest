@@ -1,4 +1,5 @@
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
 import { MapPin, Clock, Instagram, Heart } from "lucide-react";
 import insta1 from "@/assets/insta-1.jpg";
 import insta2 from "@/assets/insta-2.jpg";
@@ -8,69 +9,74 @@ import insta5 from "@/assets/insta-5.jpg";
 import insta6 from "@/assets/insta-6.jpg";
 
 const instaPosts = [insta1, insta2, insta3, insta4, insta5, insta6];
+const ease = [0.22, 1, 0.36, 1] as const;
 
 const LocationSection = () => {
-  const tilesRef = useRef<(HTMLDivElement | null)[]>([]);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) e.target.classList.add("visible");
-        });
-      },
-      { threshold: 0.15 }
-    );
-    tilesRef.current.forEach((el) => el && observer.observe(el));
-    return () => observer.disconnect();
-  }, []);
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: "-50px" });
 
   return (
     <>
-      <section id="locatie" className="py-24 md:py-32 px-5 bg-muted">
+      <section id="locatie" className="py-24 md:py-32 px-5 bg-muted" ref={ref}>
         <div className="container mx-auto max-w-6xl">
-          <div className="text-center mb-16">
+          <motion.div
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 20 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.8, ease }}
+          >
             <span className="subtitle-label mb-3 block">Contact</span>
             <h2 className="text-3xl md:text-5xl font-bold tracking-tight">Unde Ne Găsești</h2>
-          </div>
+          </motion.div>
 
           <div className="grid md:grid-cols-2 gap-6">
             <div className="space-y-4">
-              <div
-                ref={(el) => { tilesRef.current[0] = el; }}
-                className="fade-up info-tile flex gap-4 items-start bg-background"
-              >
-                <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
-                  <MapPin className="h-4 w-4 text-primary" />
-                </div>
-                <div>
-                  <h3 className="text-sm font-bold mb-1">Adresă</h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed">
-                    Bulevardul Regina Elisabeta 59, București<br />
-                    Zona Cișmigiu
-                  </p>
-                </div>
-              </div>
-
-              <div
-                ref={(el) => { tilesRef.current[1] = el; }}
-                className="fade-up info-tile flex gap-4 items-start bg-background"
-                style={{ transitionDelay: "100ms" }}
-              >
-                <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
-                  <Clock className="h-4 w-4 text-primary" />
-                </div>
-                <div>
-                  <h3 className="text-sm font-bold mb-1">Program</h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed">
-                    Luni – Vineri: 08:00 – 18:00<br />
-                    Sâmbătă – Duminică: 09:00 – 16:00
-                  </p>
-                </div>
-              </div>
+              {[
+                {
+                  icon: MapPin,
+                  title: "Adresă",
+                  text: (
+                    <>
+                      Bulevardul Regina Elisabeta 59, București<br />
+                      Zona Cișmigiu
+                    </>
+                  ),
+                },
+                {
+                  icon: Clock,
+                  title: "Program",
+                  text: (
+                    <>
+                      Luni – Vineri: 08:00 – 18:00<br />
+                      Sâmbătă – Duminică: 09:00 – 16:00
+                    </>
+                  ),
+                },
+              ].map((tile, i) => (
+                <motion.div
+                  key={tile.title}
+                  className="info-tile flex gap-4 items-start bg-background"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={inView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.8, delay: i * 0.15, ease }}
+                >
+                  <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+                    <tile.icon className="h-4 w-4 text-primary" />
+                  </div>
+                  <div>
+                    <h3 className="text-sm font-bold mb-1">{tile.title}</h3>
+                    <p className="text-muted-foreground text-sm leading-relaxed">{tile.text}</p>
+                  </div>
+                </motion.div>
+              ))}
             </div>
 
-            <div className="rounded-2xl overflow-hidden border border-border min-h-[300px]">
+            <motion.div
+              className="rounded-2xl overflow-hidden border border-border min-h-[300px]"
+              initial={{ opacity: 0, y: 20 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.8, delay: 0.3, ease }}
+            >
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2849.0!2d26.0876!3d44.4378!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sBulevardul+Regina+Elisabeta+59%2C+Bucure%C8%99ti!5e0!3m2!1sro!2sro!4v1700000000000!5m2!1sro!2sro"
                 width="100%"
@@ -81,12 +87,11 @@ const LocationSection = () => {
                 referrerPolicy="no-referrer-when-downgrade"
                 title="Locația The Bagel Bar pe Google Maps"
               />
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
 
-      {/* Instagram + Footer */}
       <footer className="border-t border-border pt-16 pb-8 px-5">
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-8">
